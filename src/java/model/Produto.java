@@ -38,5 +38,20 @@ public class Produto extends Observable{
     public void setValor(Float valor) {
         this.valor = valor;
     }
-    
+
+    public void gravar()
+    {
+        setChanged();
+        notifyObservers();
+    }
+    public void alterar()
+    {
+        setChanged();
+        notifyObservers();
+    }
+    public void excluir()
+    {
+        setChanged();
+        notifyObservers();
+    }
 }

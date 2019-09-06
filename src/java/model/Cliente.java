@@ -15,10 +15,13 @@ import java.util.Observer;
 public class Cliente implements Observer{
     private String nome;
 
+    public Cliente(String nome) {
+        this.nome = nome;
+    }
+    
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -26,12 +29,25 @@ public class Cliente implements Observer{
     {
         revistaObservada.addObserver(this);
     }
+
+    public void gravar()
+    {
+
+    }
+    public void alterar()
+    {
+
+    }
+    public void excluir()
+    {
+
+    }
     public void update(Observable revistaSubject, Object arg1)
     {
         if(revistaSubject instanceof Produto)
         {
             Produto produto = (Produto) revistaSubject;
-            
+            System.out.println(getNome() + " o produto " + produto.getNome() + " mudou!!");
         }
     }
     
