@@ -19,7 +19,12 @@ import model.Produto;
  * @author ice
  */
 public class ProdutoDAO {
-
+    
+        private static ProdutoDAO instance = new ProdutoDAO();
+        public static ProdutoDAO getInstance()
+        {
+            return instance;
+        }
         public void updateValor(float valor, String nome) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
