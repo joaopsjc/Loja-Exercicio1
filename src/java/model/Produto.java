@@ -5,7 +5,10 @@
  */
 package model;
 
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Observable;
+import persistence.ProdutoDAO;
 
 /**
  *
@@ -21,6 +24,12 @@ public class Produto extends Observable{
         valor = null;
     }
 
+    public Produto(String nome, String estado) {
+        this.nome = nome;
+        estado = estado;
+        valor = null;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -50,8 +59,15 @@ public class Produto extends Observable{
         setChanged();
         notifyObservers();
     }
-    public void alterar()
+    public void alterarEstado() throws SQLException, ClassNotFoundException
     {
+        ProdutoDAO.getInstance().updateEstado(this.getEstado(), this.getNome());
+        List<Cliente> observadores = ProdutoDAO.getInstance().readObservers(this.getNome());
+
+        observadores.forEach((observador) -> {
+            this.addObserver(observador);
+        });
+
         setChanged();
         notifyObservers();
     }
