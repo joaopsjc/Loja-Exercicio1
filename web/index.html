@@ -11,6 +11,14 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        <div>
+            <form action="FrontController?action=MudarEstadoProduto" method="post">
+              Nome do Produto
+              <input type="text" name="textNome"/><br/>
+              Novo Estado
+              <input type="text" name="textEstado"/><br/>
+              <input type="submit"/>
+            </form>
+        </div>
     </body>
 </html>
