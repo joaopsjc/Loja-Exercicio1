@@ -15,6 +15,12 @@ public class Produto extends Observable{
     private String nome, estado;
     private Float valor;
 
+    public Produto(String nome) {
+        this.nome = nome;
+        estado = null;
+        valor = null;
+    }
+
     public String getNome() {
         return nome;
     }
