@@ -31,7 +31,7 @@ public class ProdutoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.executeQuery("UPDATE `produto` SET `valor`= " + valor + " WHERE empresa.nome = '" + nome + "'");
+            st.executeQuery("UPDATE `produto` SET `valor`= " + valor + " WHERE produto.nome = '" + nome + "'");
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -44,7 +44,7 @@ public class ProdutoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.executeQuery("UPDATE `produto` SET `estado`= " + estado + " WHERE empresa.nome = '" + nome + "'");
+            st.execute("UPDATE `produto` SET `estado`= '" + estado + "' WHERE produto.nome = '" + nome + "'");
 
         } catch (SQLException e) {
             throw e;
@@ -70,10 +70,15 @@ public class ProdutoDAO {
             ResultSet rsClienteProduto = st.executeQuery(queryClienteProduto);
             
             List<Cliente> observadores = new ArrayList<>();
-            
-            while(rsClienteProduto.next())
+            List<String> idObservadores = new ArrayList<>();
+                    
+             while(rsClienteProduto.next())
             {
-                int clienteId = rsClienteProduto.getInt("id_cliente");
+                idObservadores.add(rsClienteProduto.getInt("id_cliente")+"");
+            }           
+            for(String idObservador:idObservadores) 
+            {
+                String clienteId = idObservador;
                 
                 String queryCliente = "SELECT nome FROM `cliente` WHERE cliente.id = '" + clienteId + "'";
                 ResultSet rsCliente = st.executeQuery(queryCliente);
@@ -83,11 +88,13 @@ public class ProdutoDAO {
                 observadores.add(novoObservador);
             }
 
-            
+            rsClienteProduto.close();
+            rsProduto.close();
             return observadores;
         } catch (SQLException e) {
             throw e;
         } finally {
+
             closeResources(conn, st);
         }
     }

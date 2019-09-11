@@ -26,7 +26,7 @@ public class Produto extends Observable{
 
     public Produto(String nome, String estado) {
         this.nome = nome;
-        estado = estado;
+        this.estado = estado;
         valor = null;
     }
     
@@ -62,6 +62,7 @@ public class Produto extends Observable{
     public void alterarEstado() throws SQLException, ClassNotFoundException
     {
         ProdutoDAO.getInstance().updateEstado(this.getEstado(), this.getNome());
+        
         List<Cliente> observadores = ProdutoDAO.getInstance().readObservers(this.getNome());
 
         observadores.forEach((observador) -> {

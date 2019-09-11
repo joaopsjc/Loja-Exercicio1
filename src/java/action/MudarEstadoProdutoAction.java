@@ -17,7 +17,6 @@ import model.Produto;
  * @author John
  */
 public class MudarEstadoProdutoAction implements Action{
-    @Override
     public void execute (HttpServletRequest request, HttpServletResponse response)
             throws IOException, ClassNotFoundException
     {
